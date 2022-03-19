@@ -6,7 +6,6 @@ public class CarShow {
     private int buyerCount = 0;
 
     private final List<Car> STOCK = new ArrayList<>();
-    private final Manufacturer MANUFACTURER = new Manufacturer(this);
 
     public synchronized void addCar() {
         STOCK.add(new Car());
@@ -21,7 +20,6 @@ public class CarShow {
             System.out.printf("%s enter at Car show\n", Thread.currentThread().getName());
             while (STOCK.size() == 0) {
                 System.out.printf("No cars, %s waiting a car\n", Thread.currentThread().getName());
-                new Thread(null, MANUFACTURER::createCar, "Jeep").start();
                 wait();
             }
             System.out.printf("%s buy a new car\n", Thread.currentThread().getName());
